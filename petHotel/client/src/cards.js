@@ -1,20 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { getHosts, hosts } from "./HostsView";
 
 function Cards(props) {
   return (
-    <div className="card">
+    <div className="container">
       {props.hosts &&
         props.hosts.map((hosts) => (
-          <div
-            className="col-sm-6 col-lg-3 mb-3 d-flex justify-content-evenly"
-            key={hosts.id}
-          >
-            <div
-              className="card ms-2 text-center p-3"
-              style={{ width: "25rem" }}
-            >
+          <div className="row" key={hosts.id}>
+            <div className="col-md-4" style={{ width: "25rem" }}>
               <img
                 className="card-img-top"
                 key={hosts.id}

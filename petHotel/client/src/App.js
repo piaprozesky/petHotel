@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import HostsView from "./HostsView";
 import OwnersView from "./OwnersView";
+import DetailHosts from "./DetailHosts";
+import DetailOwners from "./DetailOwners";
 import "./App.css";
 import NavBar from "./navbar";
 
@@ -15,7 +17,8 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="HostsView" element={<HostsView />} />
         <Route path="OwnersView" element={<OwnersView />} />
-        {/* route for detailHosts */}
+        {/* <Route path="/hosts/:id" element={DetailHosts />} />
+        <Route path="/owners/:id" element={DetailOwners />} /> */}
       </Routes>
     </div>
   );
@@ -52,7 +55,6 @@ function About() {
       <nav>
         <Link to="/">Home</Link>
       </nav>
-      {/* Add Image */}
       <main className="masthead-about">
         <h3>Welcome to the Homepage</h3>
         <div class="color-overlay d-flex justify-content-center align-items-center">

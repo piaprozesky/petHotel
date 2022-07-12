@@ -71,13 +71,13 @@ export default function HostsView() {
         <h2>See what others like you are posting!</h2>
         <Cards hosts={hosts} />
         {/* <DetailHosts hosts={hosts} /> */}
-        <form onSubmit={handleSubmit}>
-          <label>
+        <form class="mb-3 row g-3" onSubmit={handleSubmit}>
+          <label class="form-label">
             Whats your name?
             <input name="name" value={host.name} onChange={handleInputChange} />
           </label>
           <br />
-          <label>
+          <label class="form-label">
             Upload a picture of you
             <input
               name="foto_hosts"
@@ -85,7 +85,7 @@ export default function HostsView() {
               onChange={handleInputChange}
             />
           </label>
-          <label>
+          <label class="form-label">
             Upload a picture of your accomodation
             <input
               name="foto_place"
@@ -94,7 +94,7 @@ export default function HostsView() {
             />
           </label>
           <br />
-          <label>
+          <label class="form-label">
             What's the accomodation adress?
             <textarea
               name="adress"
@@ -102,7 +102,9 @@ export default function HostsView() {
               onChange={handleInputChange}
             ></textarea>
           </label>
-          <button>Submit</button>
+          <button type="submit" class="btn btn-primary">
+            Submit
+          </button>
         </form>
       </div>
     </div>

@@ -7,13 +7,12 @@ function DetailOwners({ owners }) {
     <div>
       {owners && (
         <>
-          {/* <h2>{detailed.name}</h2>
-          <img src={detailed.image} alt="text" /> */}
           {owners.map((owner, i) => (
             <img src={owner.image} onClick={() => setDetailed(owner)} key={i} />
           ))}
         </>
       )}
+      <DetailOwners owners={owners} />
     </div>
   );
 }

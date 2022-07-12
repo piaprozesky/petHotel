@@ -7,9 +7,6 @@ function DetailHosts({ hosts }) {
     <div className="DetailHosts">
       {hosts && (
         <>
-          {/* <h2>{detailed.name}</h2>
-          <img src={detailed.foto_hosts} alt="text" />
-          <img src={detailed.foto_place} alt="text" /> */}
           {hosts.map((host, i) => (
             <img
               src={host.foto_place}
@@ -19,6 +16,7 @@ function DetailHosts({ hosts }) {
           ))}
         </>
       )}
+      <DetailHosts hosts={hosts} />
     </div>
   );
 }
