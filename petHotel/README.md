@@ -1,4 +1,6 @@
-# Getting Started
+# Welcome to the readme.md of petHotel (I hope is well explained, in case not you can ask me anything)
+
+## To Get Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -39,6 +41,18 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+### - What is the project about
+
+Some accommodations for pets are not properly equipped and can be very expensive, taking our pet on a trip is not always possible, this is something very important for our pets if we want them to be comfortable while we are traveling. Pet Hotel is an App made for the well-being of our friends when we are not with them.
+
+This application is useful for pet owners and pet lovers who can cover all their needs while you are not with them. Pet Hotel, the pet accommodation App works as a tool to find the best place for your pet to stay.
+
+Some features already used are a list of both pet owners and hosts that you can get by clicking the link in the navbar "Host" and "Owner" respectively.
+
+### - This is an schema of DbDesigner.net
+
+![Tables](MVP/Tables.png)
+
 ### - Tech stack (KEY TECHNOLOGIES)
 
     - VS Code (of course)
@@ -49,7 +63,14 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ### - Future features
 
--
+- Able to sign in / log in as pet owner or host (authentication component)
+- Able to connect pet owners and hosts (this could be a chat, or an email notification)
+- Able to add reviews to both of them (a table for this is already created in the database with no default data yet)
+- CREATE, UPDATE, DELETE METHOD (BackEnd) -> Post method is created already for pet owners and hosts, you can already post a new host, for posting a pet owner you will need to edit the form to ask for more items (you will notice in the tables that a FK is needed for this matter)
+- APIs for location and maps (or whatever other API's you decide)
+- Filter and sort by options
+
+# For other matters...
 
 ## Learn More
 
