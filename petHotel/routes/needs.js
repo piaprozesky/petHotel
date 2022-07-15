@@ -17,7 +17,7 @@ router.get("/", function (req, res, next) {
 router.get("/:id", async function (req, res, next) {
   let { id } = req.params;
   try {
-    let results = await db(`SELECT * FROM needs WHERE id = ${id}`);
+    let results = await db(`SELECT * FROM needs WHERE needsID = ${id}`);
     let needs = results.data;
     if (needs.length === 0) {
       res.status(404).send({ error: "we cannot find what you requested" });

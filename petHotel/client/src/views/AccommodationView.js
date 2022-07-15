@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import DetailHosts from "./DetailHosts";
-import Cards from "./cards";
+// import DetailHosts from "./DetailHosts";
+import Cards from "../cards";
 
 export default function HostsView() {
   const [host, setHost] = useState({
@@ -13,7 +13,6 @@ export default function HostsView() {
   let [hosts, setHosts] = useState([]);
 
   useEffect(() => {
-    // help me fetch the function
     getHosts();
   }, []);
 
@@ -24,7 +23,7 @@ export default function HostsView() {
       body: JSON.stringify(newHost),
     };
     try {
-      let response = await fetch("/hosts/", options);
+      let response = await fetch("/accommodation/", options);
       if (response.ok) {
         let data = await response.json();
         setHosts(data);
@@ -37,7 +36,7 @@ export default function HostsView() {
   };
 
   const getHosts = () => {
-    fetch("/hosts")
+    fetch("/accommodation")
       .then((response) => response.json())
       .then((hosts) => {
         setHosts(hosts);
@@ -71,13 +70,13 @@ export default function HostsView() {
         <h2>See what others like you are posting!</h2>
         <Cards hosts={hosts} />
         {/* <DetailHosts hosts={hosts} /> */}
-        <form class="mb-3 row g-3" onSubmit={handleSubmit}>
-          <label class="form-label">
+        <form className="mb-3 row g-3" onSubmit={handleSubmit}>
+          <label className="form-label">
             Whats your name?
             <input name="name" value={host.name} onChange={handleInputChange} />
           </label>
           <br />
-          <label class="form-label">
+          <label className="form-label">
             Upload a picture of you
             <input
               name="foto_hosts"
@@ -85,8 +84,8 @@ export default function HostsView() {
               onChange={handleInputChange}
             />
           </label>
-          <label class="form-label">
-            Upload a picture of your accomodation
+          <label className="form-label">
+            Upload a picture of your accommodation
             <input
               name="foto_place"
               value={host.foto_place}
@@ -94,15 +93,15 @@ export default function HostsView() {
             />
           </label>
           <br />
-          <label class="form-label">
-            What's the accomodation adress?
+          <label className="form-label">
+            What's the accommodation adress?
             <textarea
               name="adress"
               value={host.adress}
               onChange={handleInputChange}
             ></textarea>
           </label>
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </form>

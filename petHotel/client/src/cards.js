@@ -12,19 +12,19 @@ function Cards(props) {
                 className="card-img-top"
                 key={hosts.id}
                 id={hosts.id}
-                src={hosts.foto_place}
-                alt="image accomodation"
+                src={hosts.photo_place}
+                alt="image accommodation"
               />
 
               <div className="card-body">
                 <h5 className="card-title">{hosts.name}</h5>
                 <p className="card-text">
-                  Adress of accomodation: {hosts.adress}
+                  Adress of accommodation: {hosts.adress}
                 </p>
               </div>
 
-              <div className="card-footer">
-                <Link to={"/hosts/" + hosts.id}>
+              <div>
+                <Link to={"/accommodation/" + hosts.id}>
                   <button className="btn btn-outline-primary">
                     See details
                   </button>
