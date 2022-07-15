@@ -3,6 +3,30 @@ var router = express.Router();
 const { ensureSameUser, ensureUserLoggedIn } = require("../middleware/guards");
 const db = require("../model/helper");
 
+function joinToJson(results) {
+  // Create array of applicants objs
+  let pets = results.data.map((row) => ({
+    petID: row.petID,
+    name: row.name,
+    species: row.species,
+    breed: row.breed,
+    description: row.description,
+  }));
+  // Create posts obj from first row
+  let row0 = results.data[0];
+  let posts = {
+    userID: row0.userID,
+    username: row0.username,
+    name: row0.name,
+    email: row0.email,
+    hashPass: row0.hashPass,
+    profilepicture: row0.profilepicture,
+    host: row0.host,
+    pets,
+  };
+  return posts;
+}
+
 router.get("/", ensureUserLoggedIn, async function (req, res, next) {
   let sql = "SELECT * FROM users ORDER BY username";
 
@@ -16,18 +40,24 @@ router.get("/", ensureUserLoggedIn, async function (req, res, next) {
   }
 });
 
-router.get("/:id", ensureSameUser, async function (req, res, next) {
-  let { id } = req.params;
-  let sql = `SELECT * FROM users WHERE userID = ${id}`;
+router.get("/:userID", ensureSameUser, async function (req, res, next) {
+  let { userID } = req.params;
+  // let sql = `SELECT * FROM users WHERE userID = ${id}`;
+
+  let sql = `SELECT pets.*, users.* 
+  FROM users LEFT JOIN pets ON users.fk_pet = pets.petID  WHERE users.userID = ${userID} 
+  `;
 
   try {
     let results = await db(sql);
-    // We know user exists because they is logged in!
-    let user = results.data[0];
-    delete user.hashPass; // don't return the password
+    let user = joinToJson(results);
+    // res.send(results.data);
+
+    // let user = results.data[0];
+    delete user.password;
     res.send(user);
   } catch (err) {
-    res.status(500).send({ error: err.message });
+    res.status(500).send(err);
   }
 });
 

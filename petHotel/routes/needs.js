@@ -14,10 +14,10 @@ router.get("/", function (req, res, next) {
 });
 
 /* GET one need */
-router.get("/:id", async function (req, res, next) {
-  let { id } = req.params;
+router.get("/:userID", async function (req, res, next) {
+  let { userID } = req.params;
   try {
-    let results = await db(`SELECT * FROM needs WHERE needsID = ${id}`);
+    let results = await db(`SELECT * FROM needs WHERE needsID = ${userID}`);
     let needs = results.data;
     if (needs.length === 0) {
       res.status(404).send({ error: "we cannot find what you requested" });

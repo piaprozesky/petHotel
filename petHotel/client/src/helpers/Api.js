@@ -14,8 +14,8 @@ class Api {
   }
 
   // Get data for user with ID 'userId'
-  static async getUser(userId) {
-    return await this._doFetch(`/users/${userId}`);
+  static async getUser(userID) {
+    return await this._doFetch(`/users/${userID}`);
   }
 
   // General purpose GET (for URLs like /members-only)
@@ -28,6 +28,13 @@ class Api {
     let body = { username, name, password, email, host };
 
     return await this._doFetch("/register", "POST", body);
+  }
+
+  // Register new pet
+  static async newPet(name, species, breed, description) {
+    let body = { name, species, breed, description };
+
+    return await this._doFetch("/pets/register", "POST", body);
   }
 
   // Private method for internal use only

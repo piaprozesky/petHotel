@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 
-import HostsView from "./views/AccommodationView";
+import AccommodationView from "./views/AccommodationView";
 import ProfileView from "./views/ProfileView";
 import NavBar from "./components/navbar";
 import LoginView from "./views/LoginView";
 import HomeView from "./views/HomeView";
 import ABoutView from "./views/AboutView";
 import RegisterView from "./views/RegisterView";
+
+import PrivateRoute from "./components/PrivateRoute";
 // import DetailHosts from "./DetailHosts";
 // import DetailOwners from "./DetailOwners";
 
@@ -37,7 +39,9 @@ function App() {
     let myresponse = await Api.newUser(username, name, password, email, host);
   }
 
-  async function addPet() {}
+  async function addPet(name, species, breed, description) {
+    let myresponse = await Api.newPet(name, species, breed, description);
+  }
 
   function doLogout() {
     Local.removeUserInfo();
@@ -50,9 +54,16 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeView />} />
         <Route path="about" element={<ABoutView />} />
-        <Route path="HostsView" element={<HostsView />} />
-        <Route path="ProfileView" element={<ProfileView />} />
-        <Route path="LoginView" element={<LoginView login={login} />} />
+        <Route path="AccommodationView" element={<AccommodationView />} />
+        <Route
+          path="/users/:userID"
+          element={
+            <PrivateRoute>
+              <ProfileView addPet={addPet} user={user} setUser={setUser} />
+            </PrivateRoute>
+          }
+        />
+        <Route path="login" element={<LoginView login={login} />} />
         <Route
           path="RegisterView"
           element={<RegisterView register={register} />}

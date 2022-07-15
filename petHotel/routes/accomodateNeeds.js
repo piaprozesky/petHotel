@@ -14,11 +14,11 @@ router.get("/", function (req, res, next) {
 });
 
 /* GET one accomodateNeeds */
-router.get("/:id", async function (req, res, next) {
-  let { id } = req.params;
+router.get("/:userID", async function (req, res, next) {
+  let { userID } = req.params;
   try {
     let results = await db(
-      `SELECT * FROM accomodateNeeds WHERE accomodateNeedsID = ${id}`
+      `SELECT * FROM accomodateNeeds WHERE accomodateNeedsID = ${userID}`
     );
     let accomodateNeeds = results.data;
     if (accomodateNeeds.length === 0) {

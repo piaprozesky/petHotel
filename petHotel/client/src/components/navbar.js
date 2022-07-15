@@ -26,7 +26,7 @@ function NavBar(props) {
               {props.user ? (
                 <ul className="navbar-nav">
                   <li>
-                    <Nav.Link as={Link} to="/ProfileView">
+                    <Nav.Link as={Link} to={`/users/${props.user.userID}`}>
                       Profile
                     </Nav.Link>
                   </li>
@@ -45,7 +45,7 @@ function NavBar(props) {
               ) : (
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <NavLink className="nav-link" to="/LoginView">
+                    <NavLink className="nav-link" to="/login">
                       Login
                     </NavLink>
                   </li>
