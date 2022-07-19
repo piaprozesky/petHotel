@@ -18,6 +18,11 @@ class Api {
     return await this._doFetch(`/users/${userID}`);
   }
 
+  // Get data for nedd with ID 'needID'
+  static async getNeeds(needID) {
+    return await this._doFetch(`/needs/${needID}`);
+  }
+
   // General purpose GET (for URLs like /members-only)
   static async getContent(url) {
     return await this._doFetch(url);
@@ -31,8 +36,28 @@ class Api {
   }
 
   // Register new pet
-  static async newPet(name, species, breed, description, fk_needs, fk_user) {
-    let body = { name, species, breed, description, fk_needs, fk_user };
+  static async newPet(
+    name,
+    species,
+    breed,
+    description,
+    fk_user,
+    medical,
+    exercise,
+    food,
+    special
+  ) {
+    let body = {
+      name,
+      species,
+      breed,
+      description,
+      fk_user,
+      medical,
+      exercise,
+      food,
+      special,
+    };
 
     return await this._doFetch("/pets/register", "POST", body);
   }
@@ -55,7 +80,7 @@ class Api {
   static async newNeeds(medical, exercise, food, special) {
     let body = { medical, exercise, food, special };
 
-    return await this._doFetch("/needs/register", "POST", body);
+    return await this._doFetch("/pets/register", "POST", body);
   }
 
   // Private method for internal use only

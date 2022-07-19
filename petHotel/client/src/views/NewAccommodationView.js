@@ -5,8 +5,8 @@ function NewAccommodation(props) {
   let { userID } = useParams();
 
   const emptyFormAccommodation = {
-    image: "",
     address: "",
+    photo_place: "",
   };
 
   const emptyFormAccomodateNeeds = {
@@ -44,8 +44,8 @@ function NewAccommodation(props) {
     event.preventDefault();
     console.log(formDataAccommodation);
     props.addAccomodation(
-      formDataAccommodation.image,
-      formDataAccommodation.address
+      formDataAccommodation.address,
+      formDataAccommodation.photo_place
     );
     props.addAccommodateNeeds(
       formDataAccomodateNeeds.medical,
@@ -59,15 +59,6 @@ function NewAccommodation(props) {
     <div className="container">
       <h3>Add new accommodation</h3>
       <form onSubmit={handleSubmit}>
-        <label>Image of accommodation:</label>
-        <input
-          className="form-control"
-          name="image"
-          required
-          value={formDataAccommodation.image}
-          onChange={handleChangeAccomodation}
-        />
-        <br />
         <label>Address of accommodation:</label>
         <input
           className="form-control"
@@ -77,6 +68,16 @@ function NewAccommodation(props) {
           onChange={handleChangeAccomodation}
         />
         <br />
+        <label>Image of accommodation:</label>
+        <input
+          className="form-control"
+          name="photo_place"
+          required
+          value={formDataAccommodation.photo_place}
+          onChange={handleChangeAccomodation}
+        />
+        <br />
+
         <h5>Needs you can accommodate</h5>
         <label>Medical:</label>
         <input

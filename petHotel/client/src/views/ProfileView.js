@@ -72,6 +72,8 @@ function OwnersView(props) {
       ...data,
       [name]: value,
     }));
+
+    console.log(props.user.profilePicture);
   }
 
   function handleChangeNeeds(event) {
@@ -90,11 +92,7 @@ function OwnersView(props) {
       formData.species,
       formData.breed,
       formData.description,
-      formData.fk_needs,
-      formData.fk_user
-    );
-
-    props.addNeeds(
+      formData.fk_user,
       formDataNeeds.medical,
       formDataNeeds.exercise,
       formDataNeeds.food,
@@ -117,7 +115,7 @@ function OwnersView(props) {
       <div className="row">
         <div className="col">
           <h4>My Info</h4>
-          {/* <img scr="" /> */}
+          <img scr={props.user.profilePicture} />
           <div>
             Name: {props.user.name}
             <br />
@@ -141,7 +139,7 @@ function OwnersView(props) {
                             key={accommodation.accommodationID}
                             id={accommodation.accommodationID}
                             src={accommodation.photo_place}
-                            alt="image accommodation"
+                            alt="photo_place accommodation"
                           />
 
                           <div className="card-body">
@@ -171,7 +169,7 @@ function OwnersView(props) {
           <h4>My Pet's info</h4>
           {props.user.pets &&
             props.user.pets.map((pet) => (
-              <div>
+              <div className="card p-3">
                 Name: {pet.name}
                 <br />
                 Species: {pet.species}
@@ -180,11 +178,11 @@ function OwnersView(props) {
                 <br />
                 Description: {pet.description}
                 <br />
-                <h6>My pets needs</h6>
               </div>
             ))}
           <div></div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="pt-4">
+            <h4>Add New Pet</h4>
             <label>Name:</label>
             <input
               type="text"
@@ -260,7 +258,7 @@ function OwnersView(props) {
               value={formData.special}
             />
             <br />
-            <button className="btn btn-primary">Add New Pet</button>
+            <button className="btn btn-primary">Add</button>
           </form>
         </div>
       </div>

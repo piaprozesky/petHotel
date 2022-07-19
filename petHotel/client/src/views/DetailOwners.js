@@ -8,7 +8,11 @@ function DetailOwners({ owners }) {
       {owners && (
         <>
           {owners.map((owner, i) => (
-            <img src={owner.image} onClick={() => setDetailed(owner)} key={i} />
+            <img
+              src={owner.photo_place}
+              onClick={() => setDetailed(owner)}
+              key={i}
+            />
           ))}
         </>
       )}

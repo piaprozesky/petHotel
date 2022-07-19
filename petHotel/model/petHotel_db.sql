@@ -100,6 +100,6 @@ INSERT INTO accomodateNeeds (medical, exercise, food, special) VALUES
 
 -- INSERT accommodation
 INSERT INTO accommodation (address, photo_place, fk_accomodateNeeds, fk_user) VALUES 
-('Barcelona', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpBWQBA_UdJrPGWvYo_g1dDwpC6jwfbwCArYgLPNz5pOFC-cj-p5u6B82MBNZgNQ-k5MU&usqp=CAU', 1, 2),
+('Barcelona', 'https://encrypted-tbn0.gstatic.com/photo_places?q=tbn:ANd9GcRpBWQBA_UdJrPGWvYo_g1dDwpC6jwfbwCArYgLPNz5pOFC-cj-p5u6B82MBNZgNQ-k5MU&usqp=CAU', 1, 2),
 ('Barcelona', 'https://thumbor.bigedition.com/cute-dog-room-ideas/c3tNAv_dSbIiQX8mPCxizCKFtqI=/800x0/filters:quality(80)/granite-web-prod/b3/cd/b3cd0e4a21be4a9aac07d41566410628.jpeg', 2, 3);
 

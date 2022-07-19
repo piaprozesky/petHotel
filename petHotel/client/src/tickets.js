@@ -19,7 +19,7 @@ function Tickets(props) {
                   className="card-img-top"
                   key={owners.id}
                   id={owners.id}
-                  src={owners.image}
+                  src={owners.photo_place}
                   alt="Owner Picture"
                 />
 

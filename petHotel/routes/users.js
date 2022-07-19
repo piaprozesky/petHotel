@@ -14,13 +14,14 @@ function joinToJson(results) {
   }));
   // Create posts obj from first row
   let row0 = results.data[0];
+  console.log(results.data);
   let posts = {
     userID: row0.userID,
     username: row0.username,
     name: row0.name,
     email: row0.email,
     hashPass: row0.hashPass,
-    profilepicture: row0.profilepicture,
+    profilePicture: row0.profilePicture,
     host: row0.host,
     pets,
   };
@@ -44,7 +45,7 @@ router.get("/:userID", ensureSameUser, async function (req, res, next) {
   let { userID } = req.params;
   // let sql = `SELECT * FROM users WHERE userID = ${id}`;
 
-  let sql = `SELECT pets.name AS petName, pets.*, users.* 
+  let sql = `SELECT pets.name AS petName, pets.*, users.*
   FROM users LEFT JOIN pets ON pets.fk_user = users.userID WHERE users.userID = ${userID} 
   `;
 

@@ -41,14 +41,27 @@ function App() {
     let myresponse = await Api.newUser(username, name, password, email, host);
   }
 
-  async function addPet(name, species, breed, description, fk_needs, fk_user) {
+  async function addPet(
+    name,
+    species,
+    breed,
+    description,
+    fk_user,
+    medical,
+    exercise,
+    food,
+    special
+  ) {
     let myresponse = await Api.newPet(
       name,
       species,
       breed,
       description,
-      fk_needs,
-      fk_user
+      fk_user,
+      medical,
+      exercise,
+      food,
+      special
     );
   }
 
@@ -70,11 +83,6 @@ function App() {
     );
   }
 
-  async function addNeeds(medical, exercise, food, special) {
-    let myresponse = await Api.newNeeds(medical, exercise, food, special);
-    console.log(myresponse);
-  }
-
   function doLogout() {
     Local.removeUserInfo();
     setUser(null);
@@ -91,12 +99,7 @@ function App() {
           path="/users/:userID"
           element={
             <PrivateRoute>
-              <ProfileView
-                addPet={addPet}
-                user={user}
-                setUser={setUser}
-                addNeeds={addNeeds}
-              />
+              <ProfileView addPet={addPet} user={user} setUser={setUser} />
             </PrivateRoute>
           }
         />

@@ -36,13 +36,13 @@ export default function HostsView() {
           {hosts &&
             hosts.map((hosts) => (
               <div className="row" key={hosts.id}>
-                <div className="col-md-4" style={{ width: "25rem" }}>
+                <div className="col-md-4 card" style={{ width: "25rem" }}>
                   <img
                     className="card-img-top"
                     key={hosts.id}
                     id={hosts.id}
                     src={hosts.photo_place}
-                    alt="image accommodation"
+                    alt="photo_place accommodation"
                   />
 
                   <div className="card-body">
@@ -53,7 +53,7 @@ export default function HostsView() {
                   </div>
 
                   <div>
-                    <Link to={"/accommodation/" + hosts.id}>
+                    <Link to={"/accommodation/details" + hosts.id}>
                       <button className="btn btn-outline-primary">
                         See details
                       </button>
