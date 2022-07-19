@@ -11,6 +11,12 @@ function joinToJson(results) {
     species: row.species,
     breed: row.breed,
     description: row.description,
+    needs: {
+      medical: row.medical,
+      exercise: row.exercise,
+      food: row.food,
+      special: row.special,
+    },
   }));
   // Create posts obj from first row
   let row0 = results.data[0];
@@ -45,11 +51,10 @@ router.get("/:userID", ensureSameUser, async function (req, res, next) {
   let { userID } = req.params;
   // let sql = `SELECT * FROM users WHERE userID = ${id}`;
 
-  let sql = `SELECT pets.name AS petName, pets.*, users.*
-  FROM users LEFT JOIN pets ON pets.fk_user = users.userID WHERE users.userID = ${userID} 
+  let sql = `SELECT pets.name AS petName, pets.*, users.*, needs.*
+  FROM users LEFT JOIN pets ON pets.fk_user = users.userID 
+  LEFT JOIN needs ON pets.fk_needs = needs.needsID WHERE users.userID = ${userID} 
   `;
-
-  // LEFT JOIN needs ON pets.fk_needs = needs.needsID WHERE needs.needsID = 1
 
   try {
     let results = await db(sql);
@@ -57,7 +62,7 @@ router.get("/:userID", ensureSameUser, async function (req, res, next) {
     // res.send(results.data);
 
     // let user = results.data[0];
-    delete user.password;
+    // delete user.password;
     res.send(user);
   } catch (err) {
     res.status(500).send(err);

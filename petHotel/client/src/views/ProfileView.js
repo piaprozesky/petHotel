@@ -10,14 +10,12 @@ function OwnersView(props) {
   const [errorMsg, setErrorMsg] = useState("");
 
   let [hosts, setHosts] = useState([]);
-  let [needs, setNeeds] = useState();
 
   let { userID } = useParams();
 
   useEffect(() => {
     getHosts();
     fetchProfile();
-    fetchNeeds();
   }, []);
 
   const getHosts = () => {
@@ -38,18 +36,6 @@ function OwnersView(props) {
       setErrorMsg("");
     } else {
       props.setUser(null);
-      let msg = `Error ${myresponse.status}: ${myresponse.error}`;
-      setErrorMsg(msg);
-    }
-  }
-
-  async function fetchNeeds() {
-    let myresponse = await Api.getNeeds();
-    if (myresponse.ok) {
-      setNeeds(myresponse.data);
-      setErrorMsg("");
-    } else {
-      setNeeds(null);
       let msg = `Error ${myresponse.status}: ${myresponse.error}`;
       setErrorMsg(msg);
     }
@@ -191,17 +177,26 @@ function OwnersView(props) {
           <h4>My Pet's info</h4>
           {props.user.pets &&
             props.user.pets.map((pet) => (
-              <div className="card p-3">
-                Name: {pet.name}
-                <br />
-                Species: {pet.species}
-                <br />
-                Breed: {pet.breed}
-                <br />
-                Description: {pet.description}
-                <br />
-                <h6>My pet's needs</h6>
-                {/* Medical: {needs.medical} */}
+              <div className="py-3">
+                <div className="card p-3">
+                  <h5>{pet.name}</h5>
+                  Species: {pet.species}
+                  <br />
+                  Breed: {pet.breed}
+                  <br />
+                  Description: {pet.description}
+                  <br />
+                  <div className="pt-3">
+                    <h6>My pet's needs</h6>
+                    Medical: {pet.needs.medical}
+                    <br />
+                    Exercise: {pet.needs.exercise}
+                    <br />
+                    Food: {pet.needs.food}
+                    <br />
+                    Special: {pet.needs.special}
+                  </div>
+                </div>
               </div>
             ))}
           <div></div>
