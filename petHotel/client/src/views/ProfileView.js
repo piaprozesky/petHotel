@@ -183,31 +183,35 @@ function OwnersView(props) {
           </div>
         </div>
         <div className="col">
-          <h4>My Pet's info</h4>
+          <h3>My Pet's info</h3>
           {props.user.pets &&
-            props.user.pets.map((pet) => (
-              <div className="py-3">
-                <div className="card p-3">
-                  <h5>{pet.name}</h5>
-                  Species: {pet.species}
-                  <br />
-                  Breed: {pet.breed}
-                  <br />
-                  Description: {pet.description}
-                  <br />
-                  <div className="pt-3">
-                    <h6>My pet's needs</h6>
-                    Medical: {pet.needs.medical}
+            props.user.pets.map((pet) =>
+              pet.petID !== null ? (
+                <div className="py-3">
+                  <div className="card p-3">
+                    <h5>{pet.name}</h5>
+                    Species: {pet.species}
                     <br />
-                    Exercise: {pet.needs.exercise}
+                    Breed: {pet.breed}
                     <br />
-                    Food: {pet.needs.food}
+                    Description: {pet.description}
                     <br />
-                    Special: {pet.needs.special}
+                    <div className="pt-3">
+                      <h6>My pet's needs</h6>
+                      Medical: {pet.needs.medical}
+                      <br />
+                      Exercise: {pet.needs.exercise}
+                      <br />
+                      Food: {pet.needs.food}
+                      <br />
+                      Special: {pet.needs.special}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ) : (
+                <div></div>
+              )
+            )}
           <div></div>
           <form onSubmit={handleSubmit} className="pt-4">
             <h4>Add New Pet</h4>
