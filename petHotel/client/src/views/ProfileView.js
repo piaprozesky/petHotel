@@ -10,12 +10,14 @@ function OwnersView(props) {
   const [errorMsg, setErrorMsg] = useState("");
 
   let [hosts, setHosts] = useState([]);
+  let [needs, setNeeds] = useState();
 
   let { userID } = useParams();
 
   useEffect(() => {
     getHosts();
     fetchProfile();
+    fetchNeeds();
   }, []);
 
   const getHosts = () => {
@@ -36,6 +38,18 @@ function OwnersView(props) {
       setErrorMsg("");
     } else {
       props.setUser(null);
+      let msg = `Error ${myresponse.status}: ${myresponse.error}`;
+      setErrorMsg(msg);
+    }
+  }
+
+  async function fetchNeeds() {
+    let myresponse = await Api.getNeeds();
+    if (myresponse.ok) {
+      setNeeds(myresponse.data);
+      setErrorMsg("");
+    } else {
+      setNeeds(null);
       let msg = `Error ${myresponse.status}: ${myresponse.error}`;
       setErrorMsg(msg);
     }
@@ -115,7 +129,7 @@ function OwnersView(props) {
       <div className="row">
         <div className="col">
           <h4>My Info</h4>
-          <img scr={props.user.profilePicture} />
+          <img className="img-fluid" src={props.user.profilePicture} />
           <div>
             Name: {props.user.name}
             <br />
@@ -132,14 +146,22 @@ function OwnersView(props) {
                 {hosts.map((accommodation) =>
                   accommodation.fk_user === +userID ? (
                     <div>
-                      <div className="row" key={accommodation.accommodationID}>
-                        <div className="col-md-4" style={{ width: "25rem" }}>
+                      <div
+                        className="row py-3"
+                        key={accommodation.accommodationID}
+                      >
+                        <div
+                          className="col-md-4 card p-4"
+                          style={{ width: "25rem" }}
+                        >
                           <img
                             className="card-img-top"
                             key={accommodation.accommodationID}
                             id={accommodation.accommodationID}
                             src={accommodation.photo_place}
                             alt="photo_place accommodation"
+                            width="200"
+                            height="200"
                           />
 
                           <div className="card-body">
@@ -178,6 +200,8 @@ function OwnersView(props) {
                 <br />
                 Description: {pet.description}
                 <br />
+                <h6>My pet's needs</h6>
+                {/* Medical: {needs.medical} */}
               </div>
             ))}
           <div></div>

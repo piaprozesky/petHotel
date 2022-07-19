@@ -9,10 +9,11 @@ import HomeView from "./views/HomeView";
 import ABoutView from "./views/AboutView";
 import RegisterView from "./views/RegisterView";
 import NewAccommodation from "./views/NewAccommodationView";
+import DetailHosts from "./views/DetailHosts";
 
 import PrivateRoute from "./components/PrivateRoute";
 import NavBar from "./components/navbar";
-// import DetailHosts from "./DetailHosts";
+
 // import DetailOwners from "./DetailOwners";
 
 import "./App.css";
@@ -118,9 +119,7 @@ function App() {
             />
           }
         />
-
-        {/* <Route path="/accommodation/:id" element={DetailHosts />} />
-        <Route path="/owners/:id" element={DetailOwners />} /> */}
+        <Route path="/accommodation/DetailHosts" element={<DetailHosts />} />
       </Routes>
     </div>
   );

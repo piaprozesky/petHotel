@@ -18,9 +18,9 @@ class Api {
     return await this._doFetch(`/users/${userID}`);
   }
 
-  // Get data for nedd with ID 'needID'
-  static async getNeeds(needID) {
-    return await this._doFetch(`/needs/${needID}`);
+  // Get data for needs with ID 'needsID'
+  static async getNeeds() {
+    return await this._doFetch(`/needs`);
   }
 
   // General purpose GET (for URLs like /members-only)

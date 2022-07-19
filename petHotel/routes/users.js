@@ -49,6 +49,8 @@ router.get("/:userID", ensureSameUser, async function (req, res, next) {
   FROM users LEFT JOIN pets ON pets.fk_user = users.userID WHERE users.userID = ${userID} 
   `;
 
+  // LEFT JOIN needs ON pets.fk_needs = needs.needsID WHERE needs.needsID = 1
+
   try {
     let results = await db(sql);
     let user = joinToJson(results);
