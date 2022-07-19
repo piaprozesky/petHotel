@@ -58,10 +58,22 @@ router.get("/", function (req, res, next) {
 
 // INSERT a new host into the DB
 router.post("/", async function (req, res, next) {
-  // tried and works!!
-  //your code here
-  let { address, photo_place, fk_user, fk_accomodateNeeds } = req.body; // POST always request data on the body
-  let sql = `INSERT INTO accommodation (address, photo_place, fk_user, fk_accomodateNeeds) VALUES ('${address}', '${photo_place}', '${fk_user}', '${fk_accomodateNeeds}')`;
+  let { medical, exercise, food, special } = req.body; // POST always request data on the body
+  let sqlneeds = `INSERT INTO accomodateNeeds (medical, exercise, food, special) VALUES ('${medical}', '${exercise}', '${food}', '${special}')`;
+
+  try {
+    await db(sqlneeds); // insert
+    let results = await db("SELECT * FROM accomodateNeeds");
+    res.send(results.data);
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+
+  let accomodateNeedsID = await db("SELECT LAST_INSERT_ID()");
+  accomodateNeedsID = accomodateNeedsID.data[0].accomodateNeedsID;
+
+  let { address, photo_place, fk_user } = req.body; // POST always request data on the body
+  let sql = `INSERT INTO accommodation (address, photo_place, fk_user, fk_accomodateNeeds) VALUES ('${address}', '${photo_place}', '${fk_user}', '${accomodateNeedsID}')`;
 
   try {
     await db(sql); // insert

@@ -14,7 +14,7 @@ function NavBar(props) {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/accommodationView">
-                Hosts
+                Accommodation
               </Nav.Link>
 
               <li>

@@ -1,17 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Api from "../helpers/Api";
-// import DetailOwners from "./DetailOwners";
-// import Tickets from "../tickets";
+import { Link } from "react-router-dom";
 
 function OwnersView(props) {
   const addPet = props.addPet;
+  const addNeeds = props.addNeeds;
+
   const [errorMsg, setErrorMsg] = useState("");
+
+  let [hosts, setHosts] = useState([]);
+
   let { userID } = useParams();
 
   useEffect(() => {
+    getHosts();
     fetchProfile();
   }, []);
+
+  const getHosts = () => {
+    fetch("/accommodation")
+      .then((response) => response.json())
+      .then((hosts) => {
+        setHosts(hosts);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   async function fetchProfile() {
     let myresponse = await Api.getUser(userID);
@@ -23,7 +39,6 @@ function OwnersView(props) {
       let msg = `Error ${myresponse.status}: ${myresponse.error}`;
       setErrorMsg(msg);
     }
-    console.log(myresponse);
   }
 
   const emptyForm = {
@@ -31,9 +46,20 @@ function OwnersView(props) {
     species: "",
     breed: "",
     description: "",
+    fk_needs: 1,
+    fk_user: +userID,
   };
 
+  const emptyFormNeeds = {
+    medical: "",
+    exercise: "",
+    food: "",
+    special: "",
+  };
+
+  const [formDataNeeds, setFormDataNeeds] = useState(emptyFormNeeds);
   const [formData, setFormData] = useState(emptyForm);
+
   function handleChange(event) {
     if ((formData.host = true)) {
       formData.host = 1;
@@ -47,13 +73,40 @@ function OwnersView(props) {
       [name]: value,
     }));
   }
+
+  function handleChangeNeeds(event) {
+    let { name, value } = event.target;
+
+    setFormDataNeeds((data) => ({
+      ...data,
+      [name]: value,
+    }));
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     addPet(
       formData.name,
       formData.species,
       formData.breed,
-      formData.description
+      formData.description,
+      formData.fk_needs,
+      formData.fk_user
+    );
+
+    props.addNeeds(
+      formDataNeeds.medical,
+      formDataNeeds.exercise,
+      formDataNeeds.food,
+      formDataNeeds.special
+    );
+  }
+
+  if (!props.user) {
+    return (
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
     );
   }
 
@@ -72,6 +125,47 @@ function OwnersView(props) {
             <br />
             Email: {props.user.email}
           </div>
+          <br />
+
+          <div>
+            {props.user.host === 1 ? (
+              <div>
+                <h4>My accommodation Postings</h4>
+                {hosts.map((accommodation) =>
+                  accommodation.fk_user === +userID ? (
+                    <div>
+                      <div className="row" key={accommodation.accommodationID}>
+                        <div className="col-md-4" style={{ width: "25rem" }}>
+                          <img
+                            className="card-img-top"
+                            key={accommodation.accommodationID}
+                            id={accommodation.accommodationID}
+                            src={accommodation.photo_place}
+                            alt="image accommodation"
+                          />
+
+                          <div className="card-body">
+                            <p className="card-text">
+                              Adress of accommodation: {accommodation.address}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )
+                )}
+                <Link to="/NewAccomodation">
+                  <button className="btn btn-primary">
+                    Add new accommodation
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              <div></div>
+            )}
+          </div>
         </div>
         <div className="col">
           <h4>My Pet's info</h4>
@@ -86,8 +180,10 @@ function OwnersView(props) {
                 <br />
                 Description: {pet.description}
                 <br />
+                <h6>My pets needs</h6>
               </div>
             ))}
+          <div></div>
           <form onSubmit={handleSubmit}>
             <label>Name:</label>
             <input
@@ -123,6 +219,45 @@ function OwnersView(props) {
               className="form-control"
               onChange={handleChange}
               value={formData.description}
+            />
+            <br />
+
+            <h6>Your pets needs </h6>
+
+            <label>Medical:</label>
+            <input
+              type="text"
+              name="medical"
+              className="form-control"
+              onChange={handleChangeNeeds}
+              value={formData.medical}
+            />
+            <br />
+            <label>Exercise:</label>
+            <input
+              type="text"
+              name="exercise"
+              className="form-control"
+              onChange={handleChangeNeeds}
+              value={formData.exercise}
+            />
+            <br />
+            <label>Food:</label>
+            <input
+              type="text"
+              name="food"
+              className="form-control"
+              onChange={handleChangeNeeds}
+              value={formData.food}
+            />
+            <br />
+            <label>Special:</label>
+            <input
+              type="text"
+              name="special"
+              className="form-control"
+              onChange={handleChangeNeeds}
+              value={formData.special}
             />
             <br />
             <button className="btn btn-primary">Add New Pet</button>

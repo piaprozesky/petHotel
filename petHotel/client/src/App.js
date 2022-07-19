@@ -3,13 +3,15 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 
 import AccommodationView from "./views/AccommodationView";
 import ProfileView from "./views/ProfileView";
-import NavBar from "./components/navbar";
+
 import LoginView from "./views/LoginView";
 import HomeView from "./views/HomeView";
 import ABoutView from "./views/AboutView";
 import RegisterView from "./views/RegisterView";
+import NewAccommodation from "./views/NewAccommodationView";
 
 import PrivateRoute from "./components/PrivateRoute";
+import NavBar from "./components/navbar";
 // import DetailHosts from "./DetailHosts";
 // import DetailOwners from "./DetailOwners";
 
@@ -39,8 +41,38 @@ function App() {
     let myresponse = await Api.newUser(username, name, password, email, host);
   }
 
-  async function addPet(name, species, breed, description) {
-    let myresponse = await Api.newPet(name, species, breed, description);
+  async function addPet(name, species, breed, description, fk_needs, fk_user) {
+    let myresponse = await Api.newPet(
+      name,
+      species,
+      breed,
+      description,
+      fk_needs,
+      fk_user
+    );
+  }
+
+  async function addAccomodation(address, photo_place) {
+    let myresponse = await Api.newAccomodation(
+      address,
+      photo_place,
+      user.userID
+    );
+    console.log(typeof user.userID);
+  }
+
+  async function addAccommodateNeeds(medical, exercise, food, special) {
+    let myresponse = await Api.newAccommodateNeeds(
+      medical,
+      exercise,
+      food,
+      special
+    );
+  }
+
+  async function addNeeds(medical, exercise, food, special) {
+    let myresponse = await Api.newNeeds(medical, exercise, food, special);
+    console.log(myresponse);
   }
 
   function doLogout() {
@@ -59,7 +91,12 @@ function App() {
           path="/users/:userID"
           element={
             <PrivateRoute>
-              <ProfileView addPet={addPet} user={user} setUser={setUser} />
+              <ProfileView
+                addPet={addPet}
+                user={user}
+                setUser={setUser}
+                addNeeds={addNeeds}
+              />
             </PrivateRoute>
           }
         />
@@ -67,6 +104,16 @@ function App() {
         <Route
           path="RegisterView"
           element={<RegisterView register={register} />}
+        />
+
+        <Route
+          path="NewAccomodation"
+          element={
+            <NewAccommodation
+              addAccomodation={addAccomodation}
+              addAccommodateNeeds={addAccommodateNeeds}
+            />
+          }
         />
 
         {/* <Route path="/accommodation/:id" element={DetailHosts />} />

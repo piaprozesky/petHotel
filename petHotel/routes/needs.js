@@ -29,4 +29,17 @@ router.get("/:userID", async function (req, res, next) {
   }
 });
 
+router.post("/register", async function (req, res, next) {
+  let { medical, exercise, food, special } = req.body; // POST always request data on the body
+  let sql = `INSERT INTO needs (medical, exercise, food, special) VALUES ('${medical}', '${exercise}', '${food}', '${special}')`;
+
+  try {
+    await db(sql); // insert
+    let results = await db("SELECT * FROM needs");
+    res.send(results.data);
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+});
+
 module.exports = router;

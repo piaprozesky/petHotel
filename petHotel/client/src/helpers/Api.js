@@ -31,10 +31,31 @@ class Api {
   }
 
   // Register new pet
-  static async newPet(name, species, breed, description) {
-    let body = { name, species, breed, description };
+  static async newPet(name, species, breed, description, fk_needs, fk_user) {
+    let body = { name, species, breed, description, fk_needs, fk_user };
 
     return await this._doFetch("/pets/register", "POST", body);
+  }
+
+  // Register new accomodation
+  static async newAccomodation(address, photo_place, fk_user) {
+    let body = { address, photo_place, fk_user };
+
+    return await this._doFetch("/accommodation", "POST", body);
+  }
+
+  // Register new accomodationNeeds
+  static async newAccommodateNeeds(medical, exercise, food, special) {
+    let body = { medical, exercise, food, special };
+
+    return await this._doFetch("/accomodateNeeds", "POST", body);
+  }
+
+  // Register new needs
+  static async newNeeds(medical, exercise, food, special) {
+    let body = { medical, exercise, food, special };
+
+    return await this._doFetch("/needs/register", "POST", body);
   }
 
   // Private method for internal use only

@@ -26,6 +26,7 @@ CREATE TABLE pets (
 	breed VARCHAR(50),
 	description VARCHAR(500),
 	fk_needs INT,
+	fk_user INT,
 	PRIMARY KEY (petID)
 );
 
@@ -58,16 +59,17 @@ CREATE TABLE users (
 	hashPass VARCHAR(2000) NOT NULL,
 	profilePicture VARCHAR(255),
 	host TINYINT,
-	fk_pet INT,
+	-- fk_pet INT,
 	PRIMARY KEY (userID)
 );
 
 ALTER TABLE pets ADD FOREIGN KEY (fk_needs) REFERENCES needs(needsID);
+ALTER TABLE pets ADD FOREIGN KEY (fk_user) REFERENCES users(userID);
 
 ALTER TABLE accommodation ADD FOREIGN KEY (fk_accomodateNeeds) REFERENCES accomodateNeeds(accomodateNeedsID);
 ALTER TABLE accommodation ADD FOREIGN KEY (fk_user) REFERENCES users(userID);
 
-ALTER TABLE users ADD FOREIGN KEY (fk_pet) REFERENCES pets(petID);
+-- ALTER TABLE users ADD FOREIGN KEY (fk_pet) REFERENCES pets(petID);
 
 
 
@@ -77,17 +79,18 @@ INSERT INTO needs (medical, exercise, food, special) VALUES
 ("eye drops twice a day", "run three times a week", "kibble twice a day", "brushed weekly"),
 ("none", "short walk every day", "can of food twice a day", "needs lots of attention");
 
--- INSERT PETS
-INSERT INTO pets (name, species, breed, description, fk_needs) VALUES 
-('Cooper', 'Dog', 'german shepard', 'freindly dog who needs lots of love and play time', 1), 
-('Bonito', 'Dog','mixed','likes to go for run, he does have long hair that gets eveywhere', 2),
-('Arena', 'Cat','tabby','keeps to herself most of the time, but will come seeking pets', 3);
-
 -- INSERT USERS
-INSERT INTO users (username, name, email, hashPass, host, profilePicture, fk_pet) VALUES 
-('jason1', 'Jason', 'jason@gmail.com', '$2b$12$eLuI47oNK80IAGGLqzgRUOPxCSdbQrRypXhT8F/UDjYxI5l4Q6upy', 0, 'https://cff2.earth.com/uploads/2019/07/08191128/The-personalities-of-animal-owners-are-reflected-in-their-pets.jpg', 1), 
-('camandsantiago', 'Camile and Santiago', 'cam@gmail.com', '$2b$12$eLuI47oNK80IAGGLqzgRUOPxCSdbQrRypXhT8F/UDjYxI5l4Q6upy', 1, 'https://www.petspyjamas.com/uploads/2020/04/shutterstock_189642425-690x460.jpg', 2),
-('oscar123', 'Oscar', 'oscarb@email.com', '$2b$12$eLuI47oNK80IAGGLqzgRUOPxCSdbQrRypXhT8F/UDjYxI5l4Q6upy', 1, 'https://media.istockphoto.com/photos/kitten-bengal-cat-pet-and-man-cuddling-picture-id1192677733?k=20&m=1192677733&s=612x612&w=0&h=5D-Q7fie2a_8KlmgLZSoX0GUXafIGQEQ6r7TJ27vI0M=', 3);
+INSERT INTO users (username, name, email, hashPass, host, profilePicture) VALUES 
+('jason1', 'Jason', 'jason@gmail.com', '$2b$12$eLuI47oNK80IAGGLqzgRUOPxCSdbQrRypXhT8F/UDjYxI5l4Q6upy', 0, 'https://cff2.earth.com/uploads/2019/07/08191128/The-personalities-of-animal-owners-are-reflected-in-their-pets.jpg'), 
+('camandsantiago', 'Camile and Santiago', 'cam@gmail.com', '$2b$12$eLuI47oNK80IAGGLqzgRUOPxCSdbQrRypXhT8F/UDjYxI5l4Q6upy', 1, 'https://www.petspyjamas.com/uploads/2020/04/shutterstock_189642425-690x460.jpg'),
+('oscar123', 'Oscar', 'oscarb@email.com', '$2b$12$eLuI47oNK80IAGGLqzgRUOPxCSdbQrRypXhT8F/UDjYxI5l4Q6upy', 1, 'https://media.istockphoto.com/photos/kitten-bengal-cat-pet-and-man-cuddling-picture-id1192677733?k=20&m=1192677733&s=612x612&w=0&h=5D-Q7fie2a_8KlmgLZSoX0GUXafIGQEQ6r7TJ27vI0M=');
+
+
+-- INSERT PETS
+INSERT INTO pets (name, species, breed, description, fk_needs, fk_user) VALUES 
+('Cooper', 'Dog', 'german shepard', 'freindly dog who needs lots of love and play time', 1, 1), 
+('Bonito', 'Dog','mixed','likes to go for run, he does have long hair that gets eveywhere', 2, 2),
+('Arena', 'Cat','tabby','keeps to herself most of the time, but will come seeking pets', 3, 3);
 
 -- INSERT ACCOMODATENEEDS
 INSERT INTO accomodateNeeds (medical, exercise, food, special) VALUES 

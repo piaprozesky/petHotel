@@ -7,7 +7,7 @@ function joinToJson(results) {
   // Create array of applicants objs
   let pets = results.data.map((row) => ({
     petID: row.petID,
-    name: row.name,
+    name: row.petName,
     species: row.species,
     breed: row.breed,
     description: row.description,
@@ -44,8 +44,8 @@ router.get("/:userID", ensureSameUser, async function (req, res, next) {
   let { userID } = req.params;
   // let sql = `SELECT * FROM users WHERE userID = ${id}`;
 
-  let sql = `SELECT pets.*, users.* 
-  FROM users LEFT JOIN pets ON users.fk_pet = pets.petID  WHERE users.userID = ${userID} 
+  let sql = `SELECT pets.name AS petName, pets.*, users.* 
+  FROM users LEFT JOIN pets ON pets.fk_user = users.userID WHERE users.userID = ${userID} 
   `;
 
   try {

@@ -15,12 +15,12 @@ router.get("/", function (req, res, next) {
 
 /*POST new pet */
 router.post("/register", async (req, res) => {
-  let { name, species, breed, description } = req.body;
+  let { name, species, breed, description, fk_needs, fk_user } = req.body;
 
   try {
     let sql = `
-          INSERT INTO pets ( name, species, breed, description )
-          VALUES ('${name}', '${species}', '${breed}', '${description}')
+          INSERT INTO pets ( name, species, breed, description, fk_needs, fk_user )
+          VALUES ('${name}', '${species}', '${breed}', '${description}', ${fk_needs}, ${fk_user})
       `;
     await db(sql);
     res.send({ message: "Registration succeeded" });

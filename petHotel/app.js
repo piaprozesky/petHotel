@@ -6,7 +6,7 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 var accommodationRouter = require("./routes/accommodation");
-var oaccomodateNeedsRouter = require("./routes/accomodateNeeds");
+var accomodateNeedsRouter = require("./routes/accomodateNeeds");
 var petsRouter = require("./routes/pets");
 var needsRouter = require("./routes/needs");
 var authRouter = require("./routes/auth");
@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/accommodation", accommodationRouter);
-app.use("/accomodateNeeds", oaccomodateNeedsRouter);
+app.use("/accomodateNeeds", accomodateNeedsRouter);
 app.use("/pets", petsRouter);
 app.use("/needs", needsRouter);
 app.use("/", authRouter);
