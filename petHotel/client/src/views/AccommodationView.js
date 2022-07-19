@@ -42,7 +42,7 @@ export default function HostsView() {
                   <div>
                     <div className="card p-4">
                       <img
-                        className="card-img-top"
+                        className="card-img-top "
                         key={hosts.id}
                         id={hosts.id}
                         src={hosts.photo_place}

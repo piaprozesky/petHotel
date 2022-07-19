@@ -115,15 +115,24 @@ function OwnersView(props) {
       <div className="row">
         <div className="col">
           <h4>My Info</h4>
-          <img className="img-fluid" src={props.user.profilePicture} />
+
           <div>
-            Name: {props.user.name}
+            <img
+              className="img-fluid rounded-start"
+              src={props.user.profilePicture}
+              width="200"
+              height="200"
+            />
+
+            <div className="card-body">
+              Name: {props.user.name}
+              <br />
+              Username: {props.user.username}
+              <br />
+              Email: {props.user.email}
+            </div>
             <br />
-            Username: {props.user.username}
-            <br />
-            Email: {props.user.email}
           </div>
-          <br />
 
           <div>
             {props.user.host === 1 ? (

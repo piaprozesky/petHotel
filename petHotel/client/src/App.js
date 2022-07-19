@@ -38,8 +38,22 @@ function App() {
     }
   }
 
-  async function register(username, name, password, email, host) {
-    let myresponse = await Api.newUser(username, name, password, email, host);
+  async function register(
+    username,
+    name,
+    email,
+    password,
+    profilepicture,
+    host
+  ) {
+    let myresponse = await Api.newUser(
+      username,
+      name,
+      email,
+      password,
+      profilepicture,
+      host
+    );
   }
 
   async function addPet(

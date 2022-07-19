@@ -4,10 +4,11 @@ function RegisterView(props) {
   const register = props.register;
 
   const emptyForm = {
+    username: "",
     name: "",
     email: "",
-    username: "",
     password: "",
+    profilepicture: "",
     host: 0,
   };
 
@@ -32,8 +33,9 @@ function RegisterView(props) {
     register(
       formData.username,
       formData.name,
-      formData.password,
       formData.email,
+      formData.password,
+      formData.profilepicture,
       formData.host
     );
   }
@@ -72,12 +74,21 @@ function RegisterView(props) {
           onChange={handleChange}
         />
 
+        <label>Profile Picture:</label>
+        <input
+          className="form-control"
+          type="text"
+          name="profilepicture"
+          required
+          value={formData.profilepicture}
+          onChange={handleChange}
+        />
+
         <label>Password:</label>
         <input
           className="form-control"
           type="text"
           name="password"
-          required
           value={formData.password}
           onChange={handleChange}
         />
