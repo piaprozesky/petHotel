@@ -77,7 +77,7 @@ ALTER TABLE accommodation ADD FOREIGN KEY (fk_user) REFERENCES users(userID);
 INSERT INTO needs (medical, exercise, food, special) VALUES 
 ("none", "short walk daily", "kibble twice a day", "none"), 
 ("eye drops twice a day", "run three times a week", "kibble twice a day", "brushed weekly"),
-("none", "short walk every day", "can of food twice a day", "needs lots of attention");
+("none", "none", "can of food twice a day", "needs lots of attention");
 
 -- INSERT USERS
 INSERT INTO users (username, name, email, hashPass, host, profilePicture) VALUES 
@@ -94,9 +94,9 @@ INSERT INTO pets (name, species, breed, description, fk_needs, fk_user) VALUES
 
 -- INSERT ACCOMODATENEEDS
 INSERT INTO accomodateNeeds (medical, exercise, food, special) VALUES 
-("none", "short walk daily", "kibble twice a day", "none"), 
-("eye drops twice a day", "run three times a week", "kibble twice a day", "brushed weekly"),
-("none", "short walk every day", "can of food twice a day", "needs lots of attention");
+("Any", "short walk daily", "any", "any"), 
+("any", "run three times a week", "kibble twice a day", "any"),
+("any", "daily run", "any", "any");
 
 -- INSERT accommodation
 INSERT INTO accommodation (address, photo_place, fk_accomodateNeeds, fk_user) VALUES 

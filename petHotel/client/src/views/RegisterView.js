@@ -108,5 +108,4 @@ function RegisterView(props) {
   );
 }
 
-//username, name, hashPass, email, host
 export default RegisterView;
