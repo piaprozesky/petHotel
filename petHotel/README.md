@@ -46,5 +46,7 @@ https://dbdesigner.page.link/x34KbLjiFiUTLJmM9
 - MySQL
 - dbdesigner
 - Postman
+- JSON Web Token
+- Bcrypt
 
 _This is a student project that was created at [CodeOp](http://codeop.tech), a full stack development bootcamp in Barcelona._
